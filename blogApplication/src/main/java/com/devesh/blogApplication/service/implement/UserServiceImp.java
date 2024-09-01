@@ -26,19 +26,28 @@ public class UserServiceImp implements UserService {
 		return this.userToDto(savedUser);
 	}
 
+
+	
 	@Override
 	public UserDto updateUser(UserDto userDto, Integer userId) {
-		// TODO Auto-generated method stub
-		User user = repo.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User","id",userId));
-		user.setName(userDto.getName());
-		user.setPhoneNo(userDto.getPhoneNo());
-		user.setAbout(userDto.getAbout());
-		user.setEmail(userDto.getEmail());
-		user.setPassword(userDto.getPassword());
-		   User updatedUser = repo.save(user);
-		   return this.userToDto(updatedUser);
-	
+	    System.out.println("Service ---> " + userDto.toString() + userId.toString());
+
+	    User user = repo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+	    System.out.println("Service ---->(User found in db) " + user.toString());
+
+	    user.setName(userDto.getName());
+	    user.setPhoneNo(userDto.getPhoneNo());
+	    user.setAbout(userDto.getAbout());
+	    user.setEmail(userDto.getEmail());
+	    user.setPassword(userDto.getPassword());
+
+	    User updatedUser = repo.save(user);
+	    System.out.println("Service ---->(Updated user saved in Db) " + updatedUser.toString());
+
+	    return this.userToDto(updatedUser);
 	}
+
+	
 
 	@Override
 	public UserDto getUserByid(Integer userId) {

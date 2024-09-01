@@ -3,10 +3,9 @@ package com.devesh.blogApplication.repo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.devesh.blogApplication.entity.User;
-
+import com.devesh.blogApplication.entity.Comment;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Integer>{
+public interface CommentRepo extends JpaRepository<Comment, Integer>{
 
 }
