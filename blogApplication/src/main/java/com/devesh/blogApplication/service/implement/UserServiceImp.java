@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springdoc.api.OpenApiResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,9 @@ import com.devesh.blogApplication.service.UserService;
 public class UserServiceImp implements UserService {
 	@Autowired
 	UserRepo repo;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 
 	@Override
 	public UserDto createUser(UserDto userDto) {
@@ -76,26 +80,31 @@ public class UserServiceImp implements UserService {
 	}
 
 	private User dtoToUser(UserDto userDto) {
-		User user = new User();
-		user.setUserId(userDto.getUserId());
-		user.setName(userDto.getName());
-		user.setEmail(userDto.getEmail());
-		user.setPhoneNo(userDto.getPhoneNo());
-		user.setPassword(userDto.getPassword());
-		user.setAbout(userDto.getAbout());
+//		User user = new User();
+//		user.setUserId(userDto.getUserId());
+//		user.setName(userDto.getName());
+//		user.setEmail(userDto.getEmail());
+//		user.setPhoneNo(userDto.getPhoneNo());
+//		user.setPassword(userDto.getPassword());
+//		user.setAbout(userDto.getAbout());
+		User user = this.modelMapper.map(userDto, User.class);
 
 		return user;
 
 	}
 	private UserDto userToDto(User user) {
-		UserDto userDto = new UserDto();
-		userDto.setUserId(user.getUserId());
-		userDto.setName(user.getName());
-		userDto.setEmail(user.getEmail());
-		userDto.setPhoneNo(user.getPhoneNo());
-		userDto.setPassword(user.getPassword());
-		userDto.setAbout(user.getAbout());
+//		UserDto userDto = new UserDto();
+//		userDto.setUserId(user.getUserId());
+//		userDto.setName(user.getName());
+//		userDto.setEmail(user.getEmail());
+//		userDto.setPhoneNo(user.getPhoneNo());
+//		userDto.setPassword(user.getPassword());
+//		userDto.setAbout(user.getAbout());
+		UserDto userDto = this.modelMapper.map(user, UserDto.class);
+		
+		
 		return userDto;
+		
 
 	}
 
