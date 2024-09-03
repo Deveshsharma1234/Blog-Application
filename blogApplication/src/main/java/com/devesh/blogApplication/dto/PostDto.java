@@ -1,6 +1,9 @@
 package com.devesh.blogApplication.dto;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +18,8 @@ public class PostDto {
 	private Integer postId;
 	private String title;
 	private String content;
-	private Date date;
-	private Boolean isDeleted;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+	private LocalDateTime  date;
+	
 
 }

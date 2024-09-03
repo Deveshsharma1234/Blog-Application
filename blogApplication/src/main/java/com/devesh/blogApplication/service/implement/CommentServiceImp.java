@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 
 import com.devesh.blogApplication.entity.Comment;
 import com.devesh.blogApplication.exception.ResourceNotFoundException;
@@ -13,6 +13,7 @@ import com.devesh.blogApplication.dto.CommentDto;
 import com.devesh.blogApplication.repo.CommentRepo;
 import com.devesh.blogApplication.service.CommentService;
 
+@Service
 public class CommentServiceImp implements CommentService {
 	@Autowired
 	CommentRepo repo;
