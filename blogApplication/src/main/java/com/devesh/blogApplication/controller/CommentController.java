@@ -21,7 +21,7 @@ import com.devesh.blogApplication.service.implement.CommentServiceImp;
 
 
 @RestController
-@RequestMapping("/api/comment")
+@RequestMapping("/api/comments")
 public class CommentController {
 	@Autowired
 	CommentServiceImp service;

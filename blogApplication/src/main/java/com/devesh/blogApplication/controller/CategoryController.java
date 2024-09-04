@@ -22,7 +22,7 @@ import com.devesh.blogApplication.service.implement.CategoryServiceImp;
 import lombok.val;
 
 @RestController
-@RequestMapping("api/category")
+@RequestMapping("api/categorys")
 public class CategoryController {
 	
 	@Autowired

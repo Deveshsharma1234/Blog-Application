@@ -5,6 +5,9 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.devesh.blogApplication.entity.Category;
+import com.devesh.blogApplication.entity.User;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,11 +18,17 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PostDto {
-	private Integer postId;
+
 	private String title;
 	private String content;
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-	private LocalDateTime  date;
+	 private String imageName;
+	 private Date date;
+	 private CategoryDto category;
+	 private UserDto user;
+	 
+	
+//	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+//	private LocalDateTime  date;
 	
 
 }
