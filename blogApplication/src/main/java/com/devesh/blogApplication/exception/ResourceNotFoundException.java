@@ -1,9 +1,7 @@
 package com.devesh.blogApplication.exception;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 
@@ -19,9 +17,9 @@ public class ResourceNotFoundException extends RuntimeException{
 		this.fieldName = fieldName;
 		this.fieldValue = value;
 		this.resourceName = resourceName;
-		
+
 	}
-	
-	
+
+
 
 }

@@ -1,6 +1,5 @@
 	package com.devesh.blogApplication.controller;
 
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -37,26 +36,26 @@ public class UserController {
 	}
 	@GetMapping("/{id}")
 	public ResponseEntity<UserDto>  getUserByid(@Parameter Integer id) {
-	
+
 			UserDto user =  service.getUserByid(id);
 			return new ResponseEntity<>(user,HttpStatus.OK);
-			
-		
-		
+
+
+
 	}
 	@GetMapping("/")
 	public ResponseEntity<List<UserDto>>  getAllUser(){
 		List<UserDto> list=  service.getAllUser();
 		return  ResponseEntity.ok(list);
-		
+
 	}
 	@PatchMapping("/deleteUser/{id}")
 public ResponseEntity<?> deleteUser(@Parameter Integer userId) {
 		service.deleteUser(userId);
 		return new ResponseEntity(new ApiResponce("User deleted successfully", true),HttpStatus.OK);
 	}
-	
-	
+
+
 	@PutMapping("/{id}")
 	public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, @PathVariable Integer id) {
 		System.out.println("UserDto=---->"+ userDto.getName());

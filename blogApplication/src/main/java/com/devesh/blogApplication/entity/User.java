@@ -37,15 +37,15 @@ public class User {
 	private String about;
 	private String phoneNo;
 	private Boolean isDeleted;
-	
+
 	@OneToMany(mappedBy = "user" ,fetch =FetchType.EAGER,cascade = CascadeType.ALL )
-	private List<Post> posts= new ArrayList<Post>();
-	
+	private List<Post> posts= new ArrayList<>();
+
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_Id",referencedColumnName = "userId")
-	private List<Comment>comments = new ArrayList<Comment>();
-	
-	
+	private List<Comment>comments = new ArrayList<>();
+
+
 
 
 

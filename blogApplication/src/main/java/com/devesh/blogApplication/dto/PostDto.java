@@ -1,12 +1,7 @@
+
 package com.devesh.blogApplication.dto;
 
-import java.time.LocalDateTime;
 import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.devesh.blogApplication.entity.Category;
-import com.devesh.blogApplication.entity.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,10 +20,11 @@ public class PostDto {
 	 private Date date;
 	 private CategoryDto category;
 	 private UserDto user;
-	 
-	
+	 private String tag;
+
+
 //	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 //	private LocalDateTime  date;
-	
+
 
 }

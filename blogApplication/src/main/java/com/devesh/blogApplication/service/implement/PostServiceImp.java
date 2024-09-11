@@ -1,23 +1,21 @@
 package com.devesh.blogApplication.service.implement;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
+
+
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
-import com.devesh.blogApplication.dto.ApiResponce;
-import com.devesh.blogApplication.dto.CategoryDto;
 import com.devesh.blogApplication.dto.PostDto;
-import com.devesh.blogApplication.dto.UserDto;
+import com.devesh.blogApplication.dto.PostResponce;
 import com.devesh.blogApplication.entity.Category;
 import com.devesh.blogApplication.entity.Post;
 import com.devesh.blogApplication.entity.User;
@@ -27,7 +25,9 @@ import com.devesh.blogApplication.repo.PostRepo;
 import com.devesh.blogApplication.repo.UserRepo;
 import com.devesh.blogApplication.service.PostService;
 
-@RestController
+
+
+@Service
 public class PostServiceImp implements PostService {
 	@Autowired
 	PostRepo repo;
@@ -51,7 +51,7 @@ public class PostServiceImp implements PostService {
 		post.setImageName("default.png");
 		post.setDate(new Date());
 		post.setCategory(category);
-		;
+
 		post.setUser(user);
 		this.repo.save(post);
 		return this.modelMapper.map(post, PostDto.class);
@@ -77,14 +77,21 @@ public class PostServiceImp implements PostService {
 	}
 
 	@Override
-	public List<PostDto> getAllPost(Integer pageNumber, Integer pageSize) {
-		
-		Pageable p = PageRequest.of(pageNumber, pageSize);
-		
+	public PostResponce getAllPost(Integer pageNumber, Integer pageSize,String sortBy) {
+
+		Pageable p = PageRequest.of(pageNumber, pageSize,Sort.by(sortBy));
+
 		Page<Post> pagePost = this.repo.findAll(p);
 		List<Post>allPosts = pagePost.getContent();
-		
-		return allPosts.stream().map((post) -> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+		PostResponce postResponce = new PostResponce();
+		List<PostDto>postDto =  allPosts.stream().map((post) -> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+		postResponce.setContents(postDto);
+			postResponce.setPageNumber(pagePost.getNumber());
+			postResponce.setPageSize(pagePost.getSize());
+			postResponce.setTotalElement(pagePost.getTotalElements());
+				postResponce.setTotalPage(pagePost.getTotalPages());
+				postResponce.setLastPage(pagePost.isLast());
+				return postResponce;
 
 	}
 
@@ -93,9 +100,9 @@ public class PostServiceImp implements PostService {
 		// TODO Auto-generated method stub
 		Post post = this.repo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
 		this.repo.delete(post);
-		
+
 		System.out.println("Post Deleted Successfully!!");
-		
+
 	}
 	// -----------------------------------------
 
@@ -114,14 +121,17 @@ public class PostServiceImp implements PostService {
 				.orElseThrow(() -> new ResourceNotFoundException("Category", "category", categoryId));
 		List<Post> postList = this.repo.findByCategory(category);
 		return postList.stream().map((post) -> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
-		
+
 	}
 
 	@Override
 	public List<PostDto> searchPosts(String keyword) {
 		// TODO Auto-generated method stub
-		
-		return null;
+		List<Post> allPost = this.repo.findByTitleContaining(keyword);
+		 List<PostDto>postDtoList =  allPost.stream().map((post)-> this.modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+
+
+		return postDtoList;
 	}
 
 }

@@ -1,7 +1,6 @@
 package com.devesh.blogApplication.service.implement;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -27,7 +26,7 @@ public class CategoryServiceImp implements CategoryService {
 		Category category = modelMapper.map(categoryDto, Category.class);
 		repo.save(category);
 		return this.modelMapper.map(category, CategoryDto.class);
-		
+
 	}
 
 	@Override
@@ -36,9 +35,9 @@ public class CategoryServiceImp implements CategoryService {
 		category.setTitle(categoryDto.getTitle());
 		category.setDiscription(categoryDto.getDiscription());
 		repo.save(category);
-		
+
 	return	this.modelMapper.map(category, CategoryDto.class);
-	
+
 	}
 
 	@Override
@@ -53,8 +52,8 @@ public class CategoryServiceImp implements CategoryService {
 	public CategoryDto getCategory(Integer id) {
 		// TODO Auto-generated method stub
 		Category cat = repo.findById(id).orElseThrow(()-> new ResourceNotFoundException("Category","id",id));
-		return this.modelMapper.map(cat, CategoryDto.class);	
-	
+		return this.modelMapper.map(cat, CategoryDto.class);
+
 	}
 
 	@Override
@@ -62,7 +61,7 @@ public class CategoryServiceImp implements CategoryService {
 		// TODO Auto-generated method stub
 		List<Category> allCategory = repo.findAll();
 		 return  allCategory.stream().map((category)->this.modelMapper.map(category, CategoryDto.class)).collect(Collectors.toList());
-		
+
 	}
 
 }

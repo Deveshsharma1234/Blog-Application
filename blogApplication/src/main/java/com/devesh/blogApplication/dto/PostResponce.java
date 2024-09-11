@@ -1,6 +1,6 @@
 package com.devesh.blogApplication.dto;
 
-import javax.validation.constraints.Size;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,10 +11,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommentDto {
+public class PostResponce {
 
-	private Integer commentId;
-	@Size(max= 50,message= "Character should be inside 50 char")
-	private String comment;
+	private List<PostDto> contents;
+	private int pageNumber;
+	private int pageSize;
+	private Long totalElement;
+	private int totalPage;
+	private Boolean lastPage;
 
 }

@@ -27,11 +27,11 @@ public class Category {
 	private Integer categoryId;
 	private String title;
 	private String discription;
-	
+
 	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Post> posts = new ArrayList<>();
-	 
-	
-	
+
+
+
 
 }

@@ -1,23 +1,22 @@
 package com.devesh.blogApplication.service.implement;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
-import org.springdoc.api.OpenApiResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import  com.devesh.blogApplication.exception.*;
+
 import com.devesh.blogApplication.dto.UserDto;
 import com.devesh.blogApplication.entity.User;
+import com.devesh.blogApplication.exception.ResourceNotFoundException;
 import com.devesh.blogApplication.repo.UserRepo;
 import com.devesh.blogApplication.service.UserService;
 @Service
 public class UserServiceImp implements UserService {
 	@Autowired
 	UserRepo repo;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
 
@@ -31,7 +30,7 @@ public class UserServiceImp implements UserService {
 	}
 
 
-	
+
 	@Override
 	public UserDto updateUser(UserDto userDto, Integer userId) {
 	    System.out.println("Service ---> " + userDto.toString() + userId.toString());
@@ -51,14 +50,14 @@ public class UserServiceImp implements UserService {
 	    return this.userToDto(updatedUser);
 	}
 
-	
+
 
 	@Override
 	public UserDto getUserByid(Integer userId) {
 		// TODO Auto-generated method stub
 		 User user= repo.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User","id",userId));
 		return this.userToDto(user);
-	
+
 	}
 
 	@Override
@@ -67,7 +66,7 @@ public class UserServiceImp implements UserService {
 		List<User>users = repo.findAll();
 	   List<UserDto> userDtos=   users.stream().map(user->this.userToDto(user)).collect(Collectors.toList());
 		return userDtos;
-		
+
 	}
 
 	@Override
@@ -101,10 +100,10 @@ public class UserServiceImp implements UserService {
 //		userDto.setPassword(user.getPassword());
 //		userDto.setAbout(user.getAbout());
 		UserDto userDto = this.modelMapper.map(user, UserDto.class);
-		
-		
+
+
 		return userDto;
-		
+
 
 	}
 

@@ -7,9 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.devesh.blogApplication.dto.CommentDto;
 import com.devesh.blogApplication.entity.Comment;
 import com.devesh.blogApplication.exception.ResourceNotFoundException;
-import com.devesh.blogApplication.dto.CommentDto;
 import com.devesh.blogApplication.repo.CommentRepo;
 import com.devesh.blogApplication.service.CommentService;
 
@@ -24,7 +24,7 @@ public class CommentServiceImp implements CommentService {
 	public CommentDto createComment(CommentDto commentDto) {
 	Comment comment = 	this.modelMapper.map(commentDto, Comment.class);
 	 repo.save(comment);
-		
+
 		return this.modelMapper.map(comment, CommentDto.class);
 	}
 

@@ -19,26 +19,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.devesh.blogApplication.dto.CategoryDto;
 import com.devesh.blogApplication.service.implement.CategoryServiceImp;
 
-import lombok.val;
-
 @RestController
 @RequestMapping("api/categorys")
 public class CategoryController {
-	
+
 	@Autowired
 	CategoryServiceImp service;
-	
+
 	@PostMapping("/")
 	public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CategoryDto categoryDto){
 	CategoryDto createdCategory = 	service.createCategory(categoryDto);
-	return new ResponseEntity<>(createdCategory,HttpStatus.CREATED);	
+	return new ResponseEntity<>(createdCategory,HttpStatus.CREATED);
 	}
 	@PutMapping("/{id}")
 	public ResponseEntity<CategoryDto> updateCategory(@RequestBody  CategoryDto categoryDto,@PathVariable Integer id){
 		CategoryDto updated = service.updateCategory(categoryDto, id);
-		return new ResponseEntity<CategoryDto>(updated , HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(updated , HttpStatus.ACCEPTED);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public void deleteCategory(@PathVariable Integer id) {
 		service.deleteCategory(id);
@@ -46,7 +44,7 @@ public class CategoryController {
 	@GetMapping("/{id}")
 	public ResponseEntity<CategoryDto> getCategory(@PathVariable Integer id){
 		 CategoryDto cate = service.getCategory(id);
-		 return new ResponseEntity<CategoryDto>(cate,HttpStatus.ACCEPTED);
+		 return new ResponseEntity<>(cate,HttpStatus.ACCEPTED);
 	}
 	@GetMapping("/")
 	public ResponseEntity<List<CategoryDto>> getAllCategory(){

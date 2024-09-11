@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CategoryDto {
-	
+
 	private Integer categoryId;
 	@NotEmpty
 	@Size(min = 3,message = "Invalid Title, Min 3 char")
@@ -21,6 +21,6 @@ public class CategoryDto {
 	@Size(min = 7, max = 200,message = "Discription Size should be inside 7-200 characters!")
 	@NotEmpty
 	private String discription;
-	
+
 
 }

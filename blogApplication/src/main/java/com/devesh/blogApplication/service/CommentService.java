@@ -10,6 +10,6 @@ public interface CommentService {
 	void deleteComment(Integer commentId);
 	CommentDto getCommentById(Integer id);
 	List<CommentDto> getAllComment();
-	
+
 
 }

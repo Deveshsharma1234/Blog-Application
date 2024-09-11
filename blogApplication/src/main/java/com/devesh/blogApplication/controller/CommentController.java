@@ -25,23 +25,23 @@ import com.devesh.blogApplication.service.implement.CommentServiceImp;
 public class CommentController {
 	@Autowired
 	CommentServiceImp service;
-	
+
 	@PostMapping("/")
 	public ResponseEntity<CommentDto>createComment(@Valid @RequestBody CommentDto commentDto){
 		CommentDto co =service.createComment(commentDto);
-		return new ResponseEntity<CommentDto>(co, HttpStatus.CREATED);		
+		return new ResponseEntity<>(co, HttpStatus.CREATED);
 	}
 	@PutMapping("/{id}")
 	public ResponseEntity<CommentDto>updateComment( @Valid @RequestBody  CommentDto commentDto, @PathVariable Integer id){
 		CommentDto comment = this.service.updateComment(commentDto, id);
-		return new ResponseEntity<CommentDto>(comment,HttpStatus.OK);
-		
+		return new ResponseEntity<>(comment,HttpStatus.OK);
+
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<CommentDto>getCommentById(@PathVariable Integer id){
 		 CommentDto comment =  this.service.getCommentById(id);
-		 return new ResponseEntity<CommentDto>(comment, HttpStatus.OK);
+		 return new ResponseEntity<>(comment, HttpStatus.OK);
 	}
 	@DeleteMapping("/")
 	public String deleteComment(@PathVariable Integer id){
@@ -51,8 +51,8 @@ public class CommentController {
 	@GetMapping("/")
 	public ResponseEntity<List<CommentDto>> getAllComment(){
 	List<CommentDto>list=	this.service.getAllComment();
-		return new ResponseEntity<List<CommentDto>>(list,HttpStatus.OK);
+		return new ResponseEntity<>(list,HttpStatus.OK);
 	}
-	
+
 
 }
