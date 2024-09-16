@@ -27,8 +27,8 @@ public class CommentController {
 	CommentServiceImp service;
 
 	@PostMapping("/")
-	public ResponseEntity<CommentDto>createComment(@Valid @RequestBody CommentDto commentDto){
-		CommentDto co =service.createComment(commentDto);
+	public ResponseEntity<CommentDto>createComment(@Valid @RequestBody CommentDto commentDto, Integer postId){
+		CommentDto co =service.createComment(commentDto,postId);
 		return new ResponseEntity<>(co, HttpStatus.CREATED);
 	}
 	@PutMapping("/{id}")

@@ -41,8 +41,7 @@ public class User {
 	@OneToMany(mappedBy = "user" ,fetch =FetchType.EAGER,cascade = CascadeType.ALL )
 	private List<Post> posts= new ArrayList<>();
 
-	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_Id",referencedColumnName = "userId")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	private List<Comment>comments = new ArrayList<>();
 
 

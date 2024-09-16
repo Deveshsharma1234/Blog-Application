@@ -5,7 +5,7 @@ import java.util.List;
 import com.devesh.blogApplication.dto.CommentDto;
 
 public interface CommentService {
-	CommentDto createComment(CommentDto commentDto);
+	CommentDto createComment(CommentDto commentDto,Integer postId);
 	CommentDto updateComment(CommentDto commentDto , Integer commentId);
 	void deleteComment(Integer commentId);
 	CommentDto getCommentById(Integer id);

@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +25,11 @@ public class Comment {
 	private Integer commentId;
 	private String comment;
 	private Boolean isDeleted;
+	
+	@ManyToOne
+	private Post post;
+	@ManyToOne
+	private User user;
 
 
 
