@@ -21,12 +21,12 @@ public class PostDto {
 	private String title;
 	private String content;
 	 private String imageName;
-	 private Date date;
+	 private Date date; 
 	 private CategoryDto category;
 	 private UserDto user;
 	 private String tag;
 	 
-	 private List<Comment>comments = new ArrayList<>();
+	 private List<CommentDto>comments = new ArrayList<>();
 
 
 //	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)

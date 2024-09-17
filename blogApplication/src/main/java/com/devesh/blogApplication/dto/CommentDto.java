@@ -14,7 +14,7 @@ import lombok.Setter;
 public class CommentDto {
 
 	private Integer commentId;
-	@Size(max= 50,message= "Character should be inside 50 char")
+	@Size(max= 100,message= "Character should be inside 50 char")
 	private String comment;
 
 }

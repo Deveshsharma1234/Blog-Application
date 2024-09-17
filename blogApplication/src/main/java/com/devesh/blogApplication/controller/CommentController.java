@@ -16,39 +16,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.devesh.blogApplication.dto.ApiResponce;
 import com.devesh.blogApplication.dto.CommentDto;
 import com.devesh.blogApplication.service.implement.CommentServiceImp;
 
 
 @RestController
-@RequestMapping("/api/comments")
+@RequestMapping("/api/")
 public class CommentController {
 	@Autowired
 	CommentServiceImp service;
 
-	@PostMapping("/")
-	public ResponseEntity<CommentDto>createComment(@Valid @RequestBody CommentDto commentDto, Integer postId){
-		CommentDto co =service.createComment(commentDto,postId);
+	@PostMapping("/post/{postId}/user/{userId}/comments")
+	public ResponseEntity<CommentDto>createComment(@Valid @RequestBody CommentDto commentDto, @PathVariable Integer postId,Integer userId){
+		CommentDto co =service.createComment(commentDto,postId,userId);
 		return new ResponseEntity<>(co, HttpStatus.CREATED);
 	}
-	@PutMapping("/{id}")
-	public ResponseEntity<CommentDto>updateComment( @Valid @RequestBody  CommentDto commentDto, @PathVariable Integer id){
-		CommentDto comment = this.service.updateComment(commentDto, id);
+	@PutMapping("/comments/{commentId}")
+	public ResponseEntity<CommentDto>updateComment( @Valid @RequestBody  CommentDto commentDto, @PathVariable Integer commentId){
+		CommentDto comment = this.service.updateComment(commentDto, commentId);
 		return new ResponseEntity<>(comment,HttpStatus.OK);
 
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<CommentDto>getCommentById(@PathVariable Integer id){
-		 CommentDto comment =  this.service.getCommentById(id);
+	@GetMapping("/comments/{commentId}")
+	public ResponseEntity<CommentDto>getCommentById(@PathVariable Integer commentId){
+		 CommentDto comment =  this.service.getCommentById(commentId);
 		 return new ResponseEntity<>(comment, HttpStatus.OK);
 	}
-	@DeleteMapping("/")
-	public String deleteComment(@PathVariable Integer id){
-		this.service.deleteComment(id);
-		return "Comment Deleted!!";
+	@DeleteMapping("/comments/{commentId}")
+	public ResponseEntity<ApiResponce> deleteComment(@PathVariable Integer commentId){
+		this.service.deleteComment(commentId);
+		return new ResponseEntity<ApiResponce>(new ApiResponce("Comment deleted Succesfully",true),HttpStatus.OK);
 	}
-	@GetMapping("/")
+	@GetMapping("/comments")
 	public ResponseEntity<List<CommentDto>> getAllComment(){
 	List<CommentDto>list=	this.service.getAllComment();
 		return new ResponseEntity<>(list,HttpStatus.OK);
